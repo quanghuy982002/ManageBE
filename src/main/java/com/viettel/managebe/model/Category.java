@@ -1,4 +1,4 @@
-package com.viettel.managebe;
+package com.viettel.managebe.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
