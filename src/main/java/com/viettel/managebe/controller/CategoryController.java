@@ -30,7 +30,7 @@ public class CategoryController
         return categoryService.getCategory();
     }
 
-    @PostMapping("/addCategory")
+    @PostMapping("/category")
     public Category createCategory(@RequestBody Category category) {
         return categoryService.saveCategory(category);
     }
