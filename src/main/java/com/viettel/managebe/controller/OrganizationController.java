@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,18 +18,33 @@ public class OrganizationController {
     @Autowired
     private OrganizationRepository organizationRepository;
 
+    private void buildUnitTree(Organization organization, List<Long> processedIds) {
+        List<Organization> children = organizationRepository.findByParentId(organization.getId());
+        for (Organization child : children) {
+            if (!processedIds.contains(child.getId())) {
+                child.setChildren(organizationRepository.findByParentId(child.getId()));
+                processedIds.add(child.getId());
+                buildUnitTree(child, processedIds);
+            }
+        }
+        organization.setChildren(children);
+        System.out.println("Organization: " + organization.getName() + ", Children: " + children.size());
+    }
+
     @GetMapping("/tree")
     public List<Organization> getUnitTree() {
         List<Organization> units = organizationRepository.findByParentIdIsNull();
-        buildUnitTree(units);
+        List<Long> processedIds = new ArrayList<>();
+        for (Organization unit : units) {
+            processedIds.add(unit.getId());
+            buildUnitTree(unit, processedIds);
+        }
         return units;
     }
-    private void buildUnitTree(List<Organization> organizations) {
-        for (Organization organization : organizations) {
-            List<Organization> children = organizationRepository.findByParentId(organization.getId());
-            organization.setChildren(children);
-            buildUnitTree(children);
-        }
+
+    @GetMapping("/organization")
+    public List<Organization> getAllOrganization() {
+        return organizationRepository.findAll();
     }
 
 }
