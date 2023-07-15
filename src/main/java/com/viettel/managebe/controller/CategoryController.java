@@ -1,11 +1,9 @@
 package com.viettel.managebe.controller;
 
 
-import com.viettel.managebe.CategoryService;
+import com.viettel.managebe.service.CategoryService;
 import com.viettel.managebe.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

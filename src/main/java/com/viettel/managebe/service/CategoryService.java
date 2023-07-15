@@ -1,4 +1,4 @@
-package com.viettel.managebe;
+package com.viettel.managebe.service;
 
 import com.viettel.managebe.model.Category;
 import com.viettel.managebe.repository.CategoryRepository;

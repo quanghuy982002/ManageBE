@@ -1,8 +1,9 @@
 package com.viettel.managebe.controller;
 
-import com.viettel.managebe.dto.RecruitmentOrganizationDTO;
+import com.viettel.managebe.dto.OrganizationRecruitmentDTO;
 import com.viettel.managebe.model.RecruitmentOrganization;
 import com.viettel.managebe.repository.RecruitmentOrganizationRepository;
+import com.viettel.managebe.service.RecruitmentOrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,25 +20,11 @@ public class RecruitmentOrganizationController {
     @Autowired
     private RecruitmentOrganizationRepository recruitmentOrganizationRepository;
 
-    @GetMapping("/recruitment_organization")
-    public List<RecruitmentOrganizationDTO> getAllRecruitmentOrganization() {
-        List<RecruitmentOrganization> organizations = recruitmentOrganizationRepository.findAll();
-
-        List<RecruitmentOrganizationDTO> dtos = new ArrayList<>();
-        for (RecruitmentOrganization organization : organizations) {
-            RecruitmentOrganizationDTO dto = new RecruitmentOrganizationDTO();
-            dto.setId(organization.getId());
-            dto.setOrganizationId(organization.getOrganization().getId());
-            dto.setRecruitmentName(organization.getRecruitmentName());
-            dto.setRecruitmentEmail(organization.getRecruitmentEmail());
-            dto.setRecruitmentNumphone(organization.getRecruitmentNumphone());
-            dto.setInformation(organization.getInformation());
-            dto.setScope(organization.getScope());
-            dto.setOfficeAddress(organization.getOfficeAddress());
-            dto.setActive(organization.is_active());
-            dtos.add(dto);
-        }
-        return dtos;
+    @Autowired
+    private RecruitmentOrganizationService recruitmentOrganizationService;
+    @GetMapping("/join")
+    public List<OrganizationRecruitmentDTO> getOrganizationRecruitments() {
+        return recruitmentOrganizationService.getOrganizationRecruitments();
     }
 
 }
