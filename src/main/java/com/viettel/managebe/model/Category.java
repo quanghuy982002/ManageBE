@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Table(name = "category")
 @Data
@@ -24,10 +27,16 @@ public class Category {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "effective_date")
+    private LocalDate effective_date;
+
+    @Column(name = "expired_date")
+    private LocalDate expired_date;
+
     @Column(name = "status")
     private boolean status;
 
-//    @ManyToOne(fetch = FetchType.LAZY) //LAZY không được tải luôn khi truy cập obj
-//    @JoinColumn(name = "type_code", referencedColumnName = "code")
-//    private CategoryType categoryType;
+    @ManyToOne
+    @JoinColumn(name = "type_id", nullable = false)
+    private CategoryType type;
 }
