@@ -3,9 +3,7 @@ package com.viettel.managebe.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-
+import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,9 +12,8 @@ public class CategoryDTO {
     private String code;
     private String name;
     private String description;
-    private LocalDate effectiveDate;
-    private LocalDate expiredDate;
-    private boolean status;
+    private Date effectiveDate;
+    private Date expiredDate;
     private Long typeId;
 
     public Long getId() {
@@ -51,28 +48,20 @@ public class CategoryDTO {
         this.description = description;
     }
 
-    public LocalDate getEffectiveDate() {
+    public Date getEffectiveDate() {
         return effectiveDate;
     }
 
-    public void setEffectiveDate(LocalDate effectiveDate) {
+    public void setEffectiveDate(Date effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 
-    public LocalDate getExpiredDate() {
+    public Date getExpiredDate() {
         return expiredDate;
     }
 
-    public void setExpiredDate(LocalDate expiredDate) {
+    public void setExpiredDate(Date expiredDate) {
         this.expiredDate = expiredDate;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     public Long getTypeId() {

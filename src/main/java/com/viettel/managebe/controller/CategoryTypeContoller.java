@@ -26,7 +26,6 @@ public class CategoryTypeContoller {
         return categoryTypeRepository.save(categoryType);
     }
 
-    //Delete RestApi
     @DeleteMapping("/category_type/{id}")
     public ResponseEntity<String> deleteCategoryType(@PathVariable Long id) {
         try {

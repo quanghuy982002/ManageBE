@@ -18,7 +18,6 @@ public class CategoryService {
     @Autowired
     private CategoryTypeService categoryTypeService;
 
-
     public List<Category> getCategory() {
         return categoryRepository.findAll();
     }
@@ -29,8 +28,6 @@ public class CategoryService {
         category.setDescription(categoryDTO.getDescription());
         category.setEffective_date(categoryDTO.getEffectiveDate());
         category.setExpired_date(categoryDTO.getExpiredDate());
-        category.setStatus(categoryDTO.isStatus());
-
         CategoryType categoryType = categoryTypeService.getCategoryTypeById(categoryDTO.getTypeId());
         category.setType(categoryType);
 
