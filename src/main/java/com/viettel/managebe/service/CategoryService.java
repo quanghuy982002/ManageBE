@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -33,5 +34,25 @@ public class CategoryService {
 
         return categoryRepository.save(category);
     }
+    public void deleteCategoryById(Long id) {
+        categoryRepository.deleteById(id);
+    }
 
+    public Category updateCategory(Long id, CategoryDTO categoryDTO) {
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (optionalCategory.isPresent()) {
+            Category category = optionalCategory.get();
+            category.setCode(categoryDTO.getCode());
+            category.setName(categoryDTO.getName());
+            category.setDescription(categoryDTO.getDescription());
+            category.setEffective_date(categoryDTO.getEffectiveDate());
+            category.setExpired_date(categoryDTO.getExpiredDate());
+            CategoryType categoryType = categoryTypeService.getCategoryTypeById(categoryDTO.getTypeId());
+            category.setType(categoryType);
+
+            return categoryRepository.save(category);
+        } else {
+            return null;
+        }
+    }
 }
