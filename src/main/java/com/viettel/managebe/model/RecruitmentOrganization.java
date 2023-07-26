@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,10 +19,9 @@ public class RecruitmentOrganization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organization_id")
     private Organization organization;
-
 
     private String recruitmentName;
     private String recruitmentEmail;
@@ -29,4 +30,16 @@ public class RecruitmentOrganization {
     private int scope;
     private String officeAddress;
     private boolean is_active;
+
+    private Date effective_start_date;
+    private Date effective_end_date;
+    private String image_file;
+
+    public boolean isIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(boolean is_active) {
+        this.is_active = is_active;
+    }
 }

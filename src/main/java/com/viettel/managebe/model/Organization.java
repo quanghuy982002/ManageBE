@@ -29,9 +29,6 @@ public class Organization {
     @Transient
     private List<Organization> children;
 
-    private Date effective_start_date;
-    private Date effective_end_date;
-    private String image_file;
 }
 
 

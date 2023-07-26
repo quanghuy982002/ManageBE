@@ -1,16 +1,12 @@
 package com.viettel.managebe.controller;
 
-import com.viettel.managebe.dto.OrganizationRecruitmentDTO;
+import com.viettel.managebe.dto.RecruitmentOrganizationDTO;
 import com.viettel.managebe.model.RecruitmentOrganization;
 import com.viettel.managebe.repository.RecruitmentOrganizationRepository;
 import com.viettel.managebe.service.RecruitmentOrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,9 +18,33 @@ public class RecruitmentOrganizationController {
 
     @Autowired
     private RecruitmentOrganizationService recruitmentOrganizationService;
-    @GetMapping("/join")
-    public List<OrganizationRecruitmentDTO> getOrganizationRecruitments() {
-        return recruitmentOrganizationService.getOrganizationRecruitments();
+
+    @GetMapping("/recruitment_organization")
+    public List<RecruitmentOrganizationDTO> getAllRecruitmentOrganizations() {
+        return recruitmentOrganizationService.getAllRecruitmentOrganizations();
     }
 
+    @GetMapping("/recruitment_organization/{id}")
+    public RecruitmentOrganizationDTO getRecruitmentOrganizationById(@PathVariable long id) {
+        return recruitmentOrganizationService.getRecruitmentOrganizationById(id);
+    }
+
+    @PostMapping("/recruitment_organization")
+    public RecruitmentOrganizationDTO createRecruitmentOrganization(@RequestBody RecruitmentOrganizationDTO dto) {
+        return recruitmentOrganizationService.createRecruitmentOrganization(dto);
+    }
+    @PutMapping("/recruitment_organization/{id}")
+    public RecruitmentOrganizationDTO updateRecruitmentOrganization(@PathVariable long id, @RequestBody RecruitmentOrganizationDTO dto) {
+        return recruitmentOrganizationService.updateRecruitmentOrganization(id, dto);
+    }
+    @DeleteMapping("/recruitment_organization/{id}")
+    public void deleteRecruitmentOrganization(@PathVariable long id) {
+        recruitmentOrganizationService.deleteRecruitmentOrganization(id);
+    }
+
+//    //API join 2 table db
+//    @GetMapping("/join")
+//    public List<RecruitmentOrganizationDTO> getOrganizationRecruitments() {
+//        return recruitmentOrganizationService.getOrganizationRecruitments();
+//    }
 }
